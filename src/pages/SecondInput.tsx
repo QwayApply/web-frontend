@@ -1,32 +1,26 @@
 import React from 'react';
 import ParticleBackground from '../components/ParticleBackground';
 import MainLogo from '../components/MainLogo';
+import SecondInputForm from '../components/SecondInputForm';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { Modal, ModalContents } from './Root';
 
-const Modal = styled.div`
-  position: fixed;
-  top: 20%;
-  left: 20%;
-  width: 60%;
-  height: 60%;
-  border-radius: 10px;
-  opacity: 0.8;
-  background-color: #ffffff;
-  z-index: 10;
-`;
-
-const Root: React.FC = () => {
-  const data = useParams();
+const SecondInput: React.FC = () => {
+  const location = useLocation();
+  const data = location.state;
   console.log(data);
   return (
     <div>
       <ParticleBackground />
       <Modal>
-        <MainLogo />
+        <ModalContents>
+          <MainLogo />
+          <SecondInputForm newData={data} />
+        </ModalContents>
       </Modal>
     </div>
   );
 };
 
-export default Root;
+export default SecondInput;

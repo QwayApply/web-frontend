@@ -2,15 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
-
-const FormDiv = styled.div`
+import data from '../freq_score.json';
+export const FormDiv = styled.div`
   background-color: #2d2d2d;
   opacity: 0.7;
-  margin-top: 5%;
-  padding: 5%;
-  margin-left: 15%;
-  margin-right: 15%;
   border-radius: 10px;
+  padding: 34px;
+  text-align: center;
 `;
 const InputForm = styled.form`
   display: flex;
@@ -33,20 +31,15 @@ const Input = styled.input`
   margin-top: 5%;
   margin-bottom: 5%;
 `;
-const SubmitButton = styled.button`
-  width: 30%;
-  height: 50px;
-  border-radius: 10px;
+
+export const SubmitButton = styled.button`
+  padding: 18px 52px;
   border: 1px solid #ffffff;
   background-color: #ffffff;
   font-size: 1.5rem;
   font-weight: bold;
   color: #000000;
-  text-align: center;
-  margin-top: 5%;
-  margin-bottom: 0.5%;
-  margin-left: 35%;
-  margin-right: 35%;
+  border-radius: 32px;
 `;
 
 const InfoText = styled.text`
@@ -62,37 +55,50 @@ const MainInput: React.FC = () => {
   const history = useHistory();
   const [scoreData, setScoreData] = useState({});
 
-  // const handleSubmit = (e: any) => {
-  //   // console.log('A');
-  //   // //@ts-ignore
-  //   // const tempData = {
-  //   //   score: {
-  //   //     history: 0,
-  //   //     korean: 0,
-  //   //     math: 0,
-  //   //     english: 0,
-  //   //     addtional: 0,
-  //   //     additional2: 0,
-  //   //     secondLanguage: 0,
-  //   //   },
-  //   // };
-  //   // tempData.score.history = e.getElementById('korea-history').value;
-  //   // tempData.score.korean = e.getElementById('korean').value;
-  //   // tempData.score.math = e.getElementById('math').value;
-  //   // tempData.score.english = e.getElementById('english').value;
-  //   // tempData.score.addtional = e.getElementById('additional').value;
-  //   // tempData.score.additional2 = e.getElementById('additional2').value;
-  //   // tempData.score.secondLanguage = e.getElementById('secondLanguage').value;
-  //   // console.log(tempData);
+  const [koreaHistoryData, setKoreaHistoryData] = useState(0);
+  const [koreanData, setKoreanData] = useState(0);
+  const [englishData, setEnglishData] = useState(0);
+  const [mathData, setMathData] = useState(0);
+  const [addtionalData, setAddtionalData] = useState(0);
+  const [addtional2Data, setAddtional2Data] = useState(0);
+  const [secondLanguageData, setSecondLanguageData] = useState(0);
 
-  // };
-  const onChangeHandler = (e: any) => {
-    setScoreData({
-      ...scoreData,
-      [e.target.id]: e.target.value,
-    });
-    console.log(scoreData);
+  const koreaHistoryChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setKoreaHistoryData(parseInt(event.target.value, 10));
   };
+
+  const koreanChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setKoreanData(parseInt(event.target.value, 10));
+  };
+
+  const englishChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEnglishData(parseInt(event.target.value, 10));
+  };
+
+  const mathChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMathData(parseInt(event.target.value, 10));
+  };
+
+  const addtionalChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setAddtionalData(parseInt(event.target.value, 10));
+  };
+
+  const addtional2ChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setAddtional2Data(parseInt(event.target.value, 10));
+  };
+
+  const secondLanguageChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSecondLanguageData(parseInt(event.target.value, 10));
+  };
+
   return (
     <div>
       <FormDiv>
@@ -101,49 +107,63 @@ const MainInput: React.FC = () => {
         </InfoText>
         <InputForm>
           <Input
-            onChange={onChangeHandler}
-            id="history"
+            onChange={koreaHistoryChangeHandler}
+            id="koreaHistory"
             type="number"
             placeholder="한국사"
           />
           <Input
-            onChange={onChangeHandler}
+            onChange={koreanChangeHandler}
             id="korean"
             type="number"
             placeholder="국어"
           />
           <Input
-            onChange={onChangeHandler}
+            onChange={englishChangeHandler}
             id="math"
             type="number"
             placeholder="수학"
           />
           <Input
-            onChange={onChangeHandler}
+            onChange={mathChangeHandler}
             id="english"
             type="number"
             placeholder="영어"
           />
           <Input
-            onChange={onChangeHandler}
+            onChange={addtionalChangeHandler}
             id="additional"
             type="number"
             placeholder="탐구 1"
           />
           <Input
-            onChange={onChangeHandler}
+            onChange={addtional2ChangeHandler}
             id="additional2"
             type="number"
             placeholder="탐구 2"
           />
           <Input
-            onChange={onChangeHandler}
+            onChange={secondLanguageChangeHandler}
             id="secondLanguage"
             type="number"
             placeholder="제2외국어"
           />
         </InputForm>
-        <button onClick={() => history.push('/second', scoreData)}>제출</button>
+        <SubmitButton
+          onClick={() =>
+            history.push('/second', {
+              koreaHistoryData,
+              koreanData,
+              englishData,
+              mathData,
+              addtionalData,
+              addtional2Data,
+              secondLanguageData,
+            })
+          }
+        >
+          제출
+        </SubmitButton>
       </FormDiv>
     </div>
   );

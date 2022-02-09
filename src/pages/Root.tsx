@@ -4,21 +4,29 @@ import MainLogo from '../components/MainLogo';
 import styled from 'styled-components';
 import MainInput from '../components/MainInput';
 
-const Modal = styled.div`
+export const Modal = styled.div`
+  display: flex;
   position: fixed;
-  top: 20%;
-  left: 20%;
-  width: 60%;
-  height: 60%;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`;
+
+export const ModalContents = styled.div`
+  width: 100%;
+  max-width: 1000px;
+  height: fit-content;
   border-radius: 10px;
   opacity: 0.8;
   background-color: #ffffff;
   z-index: 10;
+  padding: 34px;
 `;
 
 const IntroductionText = styled.text`
   display: flex;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color: #000000;
   text-align: left;
@@ -26,6 +34,7 @@ const IntroductionText = styled.text`
   margin-bottom: 5%;
   align-content: center;
   justify-content: center;
+  line-height: 1.5;
 `;
 
 const Root: React.FC = () => {
@@ -33,16 +42,18 @@ const Root: React.FC = () => {
     <div>
       <ParticleBackground />
       <Modal>
-        <MainLogo />
-        <MainInput />
-        <IntroductionText>
-          QWayApply Is mock apply service for K-SAT[Jeong-si] We used
-          Quantum-GAN <br />
-          to presume empty sample to provide more accurate prediction. Enter{' '}
-          <br />
-          Your K-SAT score and University to apply and check your probabilty.{' '}
-          <br />
-        </IntroductionText>
+        <ModalContents>
+          <MainLogo />
+          <MainInput />
+          <IntroductionText>
+            QWayApply Is mock apply service for K-SAT[Jeong-si] We used
+            Quantum-GAN <br />
+            to presume empty sample to provide more accurate prediction. Enter{' '}
+            <br />
+            Your K-SAT score and University to apply and check your probabilty.{' '}
+            <br />
+          </IntroductionText>
+        </ModalContents>
       </Modal>
     </div>
   );

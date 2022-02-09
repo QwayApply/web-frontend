@@ -5,7 +5,7 @@ const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 3%;
+  margin-bottom: 34px;
 `;
 
 const LogoMainText = styled.h1`
