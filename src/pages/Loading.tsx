@@ -1,13 +1,13 @@
 import React from 'react';
 import ParticleBackground from '../components/ParticleBackground';
 import MainLogo from '../components/MainLogo';
-import SecondInputForm from '../components/SecondInputForm';
 import styled from 'styled-components';
-import { useLocation } from 'react-router-dom';
 import { Modal, ModalContents } from './Root';
 import Lottie from 'react-lottie';
 import animationData from '../lottie.json';
+import { useHistory } from 'react-router-dom';
 const Loading: React.FC = () => {
+  const history = useHistory();
   const option = {
     loop: true,
     autoplay: true,
@@ -21,7 +21,9 @@ const Loading: React.FC = () => {
     text-align: center;
     margin-bottom: 50px;
   `;
-
+  setTimeout(function () {
+    history.push('/result');
+  }, 3000);
   return (
     <div>
       <ParticleBackground />
